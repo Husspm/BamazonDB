@@ -92,6 +92,6 @@ function displayUpdates() {
             //was using a for key in res[index] loop nested in this loop but the print out was too sloppy
             console.log(res[index].department_name, res[index].product_name, res[index].price, res[index].quantity);
         } // ends var index for loop
+        createProduct(); //start the whole process over
     }); // ends mysql call
-    createProduct(); //start the whole process over
 }
