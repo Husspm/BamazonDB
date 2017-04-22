@@ -1,5 +1,2 @@
 # BamazonDB
-[screen shot one]("photos/Screenshot (38).png")
-[screen shot two]("photos/Screenshot (39).png")
-[screen shot three]("photos/Screenshot (40).png")
-[screen shot four]("photos/Screenshot (41).png")
+[view screen shots here or in the photos folder](https://goo.gl/photos/9MqVFW8KVi1dvHs1A)
