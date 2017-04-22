@@ -6,22 +6,20 @@ var connection = db.createConnection({
     host: "localhost",
     port: 3306,
     user: "root",
-    password: "", //I need that ;)
+    password: "qaz123wsx456", //I need that ;)
     database: "BamazonDB"
 });
 connection.connect(function(err) {
     if (err) throw err;
-    else {
-        console.log("Welcome you are connected to the bamazonDB as id + " + connection.threadId);
-        checkUser();
-    }
+    console.log("Welcome you are connected to the bamazonDB as id + " + connection.threadId);
+    checkUser();
 });
-var accessPW = "thisDOT";
+var accessPW = "thisDOT"; //you'll need this if you don't want the bamazon law team coming after you
 var PWattAllowed = 3;
 
 function checkUser() {
     if (PWattAllowed === 0) {
-        console.log("We have your IP address, the cops are on their way you criminal!!!");
+        console.log("We have your IP address, the cops are on their way you criminal!!! How dare you try hack Bamazon");
     } else {
         ask.prompt([{
             message: "Who is using this program?",
@@ -49,7 +47,7 @@ function checkUser() {
 
 function managerHome() {
     ask.prompt([{
-        message: "What would you like to do today",
+        message: "What would you like to do today?",
         type: "list",
         choices: ["View Inventory", "Add more Products", "View low Inventory", "Replenish Stock"],
         name: "managerChoice"
@@ -107,7 +105,7 @@ function createProduct() {
 //testing the values before attempting to update the database, any info missing will return to the createProduct function
 function testValues(product) {
     console.log("Testing your values...");
-    //there is probably a smarter way to do this, but this is mostly working so I am gonna run with it
+    //there is probably a smarter way to do this, but this is working so I am gonna run with it
     var passedTestOne = true;
     var passedTestTwo = false;
     for (var key in product) {
@@ -146,6 +144,7 @@ function Product(name, department, price, quantity) {
     return this; //return to caller 
 }
 //displays the info once itemed successfully added, reused in manager.js with some js trickery to change its output
+//this might seem a little convoluted but I wanted to reuse this function as much as possible
 function displayUpdates(check, check2) {
     connection.query("SELECT * FROM products", function(err, res) {
         if (err) throw err;
@@ -155,7 +154,7 @@ function displayUpdates(check, check2) {
                 console.log(res[index].department_name, res[index].product_name, res[index].price, res[index].quantity);
             } else {
                 if (res[index].quantity < 5) { // if check param passed display low
-                    console.log("This products is running low");
+                    console.log("This product is running low");
                     console.log(res[index].item_id, res[index].department_name, res[index].product_name, res[index].price, res[index].quantity);
                 }
             }
@@ -181,7 +180,7 @@ function updateStock(name) {
     }]).then(function(name) {
         connection.query("UPDATE products SET quantity= " + (amount + parseInt(name.amount)) + " WHERE item_id= " + idToUpdate, function(err, res) {
             if (err) throw err;
-            console.log("We've updated our inventory, thanks for being on top of it");
+            console.log("We've updated the inventory, thanks for being on top of it");
             managerHome();
         });
     });
